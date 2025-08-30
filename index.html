@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar Aplicativos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 1200px;
+            width: 100%;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .app-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .app-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .app-card:hover .app-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .app-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            background: linear-gradient(135deg, #ee5a24, #ff6b6b);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .app-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .apps-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .app-card {
+                padding: 20px;
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Stellar Aplicativos</h1>
+            <p>Descubre aplicaciones increíbles</p>
+        </div>
+
+        <div class="apps-grid">
+            <div class="app-card">
+                <div class="app-icon">📱</div>
+                <h3 class="app-name">Stellar Fox Browser</h3>
+                <button class="download-btn" onclick="downloadApp('Stellar Fox', '')">Descargar</button>
+                <p class="app-description">Un navegador revolucionario enfocado en el modernismo y la seguridad local, pretende ser liviano y seguro, escrito en Python-GTK-Webview.</p>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon">🎮</div>
+                <h3 class="app-name">Stellar Media Convertidor</h3>
+                <button class="download-btn" onclick="downloadApp('Stellar Media', 'https://github.com/stellar-br/stellar-br.github.io/releases/download/0.1/stellar-media-convertidor_0.1_all.deb')">Descargar</button>
+                <p class="app-description">Una aplicación revolucionaria para optimizar el rendimiento de tu PC con funciones avanzadas de limpieza, escrito en Python-GTK sin descuidar la ligeresa.</p>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon">📷</div>
+                <h3 class="app-name">Stellar PDF</h3>
+                <button class="download-btn" onclick="downloadApp('Stellar PDF','https://github.com/stellar-br/stellar-br.github.io/releases/download/0.1/stellar-pdf-reader_0.1_all.deb')">Descargar</button>
+                <p class="app-description">Visualisador de PDF, sencillo y ligero, pero 100% moderno, pretende ser el favorito en computadores, escrito en Python-GTK.</p>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon">🏃‍♂️</div>
+                <h3 class="app-name">Stellar Picture</h3>
+                <button class="download-btn" onclick="downloadApp('FitTracker Plus')">Descargar</button>
+                <p class="app-description">Tu compañero personal de fitness que monitorea tu actividad física, crea rutinas personalizadas y te motiva a alcanzar tus objetivos.</p>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon">🎵</div>
+                <h3 class="app-name">Stellar Cleaner</h3>
+                <button class="download-btn" onclick="downloadApp('MusicWave')">Descargar</button>
+                <p class="app-description">Reproduce tu música favorita con calidad superior, descubre nuevos artistas y crea playlists personalizadas con recomendaciones inteligentes.</p>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon">🎵</div>
+                <h3 class="app-name">Stellar Explorer</h3>
+                <button class="download-btn" onclick="downloadApp('MusicWave')">Descargar</button>
+                <p class="app-description">Reproduce tu música favorita con calidad superior, descubre nuevos artistas y crea playlists personalizadas con recomendaciones inteligentes.</p>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon">🏃‍♂️</div>
+                <h3 class="app-name">Stellar DocConver</h3>
+                <button class="download-btn" onclick="downloadApp('FitTracker Plus')">Descargar</button>
+                <p class="app-description">Tu compañero personal de fitness que monitorea tu actividad física, crea rutinas personalizadas y te motiva a alcanzar tus objetivos.</p>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon">🎵</div>
+                <h3 class="app-name">Stellar RAR</h3>
+                <button class="download-btn" onclick="downloadApp('MusicWave')">Descargar</button>
+                <p class="app-description">Reproduce tu música favorita con calidad superior, descubre nuevos artistas y crea playlists personalizadas con recomendaciones inteligentes.</p>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon">🎵</div>
+                <h3 class="app-name">Stellar Smart</h3>
+                <button class="download-btn" onclick="downloadApp('MusicWave')">Descargar</button>
+                <p class="app-description">Reproduce tu música favorita con calidad superior, descubre nuevos artistas y crea playlists personalizadas con recomendaciones inteligentes.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function downloadApp(appName, url) {
+        // efecto visual
+        const btn = event.target;
+        btn.style.transform = 'scale(0.95)';
+        setTimeout(() => { btn.style.transform = ''; }, 150);
+
+        // redirigir al enlace real
+        window.open(url, '_blank');
+    }
+
+        // Añadir efectos de partículas en el header
+        function createSparkles() {
+            const header = document.querySelector('.header');
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                header.appendChild(sparkle);
+            }
+        }
+
+        // Animación de entrada para las tarjetas
+        function animateCards() {
+            const cards = document.querySelectorAll('.app-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100 + 300);
+            });
+        }
+
+        // Inicializar efectos
+        window.addEventListener('load', () => {
+            createSparkles();
+            animateCards();
+        });
+    </script>
+</body>
+</html>
